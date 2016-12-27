@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>web/register.jsp</url>
+            <bookmark id="1">
+                <name/>
+                <line>150</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/dangl/Documents/NetBeansProjects/TTShop/web/product.jsp</file>
+            <file>file:/C:/Users/dangl/Documents/NetBeansProjects/TTShop/src/java/model/Cart.java</file>
+            <file>file:/C:/Users/dangl/Documents/NetBeansProjects/TTShop/src/java/controller/CartServlet.java</file>
+            <file>file:/C:/Users/dangl/Documents/NetBeansProjects/TTShop/src/java/model/Item.java</file>
+            <file>file:/C:/Users/dangl/Documents/NetBeansProjects/TTShop/web/cart.jsp</file>
+            <file>file:/C:/Users/dangl/Documents/NetBeansProjects/TTShop/web/detail.jsp</file>
+            <file>file:/C:/Users/dangl/Documents/NetBeansProjects/TTShop/web/login.jsp</file>
+            <file>file:/C:/Users/dangl/Documents/NetBeansProjects/TTShop/web/header.jsp</file>
+        </group>
+    </open-files>
+</project-private>
