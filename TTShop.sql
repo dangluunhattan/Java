@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 27, 2016 at 09:30 AM
+-- Generation Time: Jan 12, 2017 at 02:15 PM
 -- Server version: 5.6.31
 -- PHP Version: 5.5.38
 
@@ -63,6 +63,35 @@ CREATE TABLE IF NOT EXISTS `admin_group` (
 INSERT INTO `admin_group` (`id`, `name`, `sort_order`, `permissions`) VALUES
 (1, 'Admin', 1, 'a:14:{s:4:"tran";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:13:"product_order";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:3:"cat";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:7:"product";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:11:"admin_group";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:5:"admin";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:4:"user";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:4:"news";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:4:"info";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:7:"support";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:7:"contact";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:7:"comment";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:5:"slide";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:5:"video";a:2:{i:0;s:4:"list";i:1;s:6:"change";}}'),
 (2, 'Mod', 2, 'a:9:{s:3:"cat";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:7:"product";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:4:"news";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:4:"info";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:7:"support";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:7:"contact";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:7:"comment";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:5:"slide";a:2:{i:0;s:4:"list";i:1;s:6:"change";}s:5:"video";a:2:{i:0;s:4:"list";i:1;s:6:"change";}}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bill`
+--
+
+CREATE TABLE IF NOT EXISTS `bill` (
+  `bill_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `total` double NOT NULL,
+  `payment` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `address` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bill_detail`
+--
+
+CREATE TABLE IF NOT EXISTS `bill_detail` (
+  `bill_detail_id` bigint(20) NOT NULL,
+  `bill_id` bigint(20) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
+  `price` double NOT NULL,
+  `qty` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -230,71 +259,6 @@ CREATE TABLE IF NOT EXISTS `news` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order`
---
-
-CREATE TABLE IF NOT EXISTS `order` (
-  `transaction_id` int(255) NOT NULL,
-  `id` int(255) NOT NULL,
-  `product_id` int(255) NOT NULL,
-  `qty` int(11) NOT NULL DEFAULT '0',
-  `amount` decimal(15,4) NOT NULL DEFAULT '0.0000',
-  `data` text COLLATE utf8_bin NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Dumping data for table `order`
---
-
-INSERT INTO `order` (`transaction_id`, `id`, `product_id`, `qty`, `amount`, `data`, `status`) VALUES
-(7, 6, 2, 1, '4000000.0000', '', 1),
-(8, 7, 2, 1, '4000000.0000', '', 0),
-(9, 8, 8, 1, '10000000.0000', '', 0),
-(10, 9, 8, 1, '10000000.0000', '', 0),
-(11, 10, 8, 1, '10000000.0000', '', 2),
-(12, 11, 8, 1, '10000000.0000', '', 0),
-(13, 12, 8, 2, '20000000.0000', '', 0),
-(14, 13, 8, 1, '10000000.0000', '', 1),
-(15, 14, 3, 1, '5000000.0000', '', 0),
-(16, 15, 3, 1, '5000000.0000', '', 0),
-(17, 16, 3, 1, '5000000.0000', '', 2),
-(18, 17, 3, 1, '5000000.0000', '', 0),
-(19, 18, 3, 1, '5000000.0000', '', 1),
-(20, 19, 3, 1, '5000000.0000', '', 0),
-(21, 20, 8, 1, '10000000.0000', '', 0),
-(22, 21, 9, 1, '5400000.0000', '', 0),
-(22, 22, 7, 2, '11600000.0000', '', 0),
-(23, 23, 8, 1, '9500000.0000', '', 1),
-(24, 24, 9, 1, '5400000.0000', '', 2),
-(25, 25, 7, 1, '5800000.0000', '', 1),
-(26, 26, 4, 1, '6000000.0000', '', 0),
-(27, 27, 4, 1, '6000000.0000', '', 0),
-(28, 28, 16, 1, '16000000.0000', '', 0),
-(29, 29, 16, 1, '16000000.0000', '', 0),
-(30, 30, 16, 1, '16000000.0000', '', 0),
-(31, 31, 9, 1, '0.0000', '', 2),
-(32, 32, 16, 1, '16000000.0000', '', 0),
-(32, 33, 3, 1, '5000000.0000', '', 0),
-(33, 34, 3, 1, '5000000.0000', '', 0),
-(34, 35, 16, 2, '32000000.0000', '', 0),
-(35, 36, 8, 1, '9500000.0000', '', 2),
-(36, 37, 16, 2, '32000000.0000', '', 2),
-(37, 38, 16, 1, '16000000.0000', '', 0),
-(38, 39, 16, 1, '16000000.0000', '', 0),
-(39, 40, 9, 1, '5400000.0000', '', 0),
-(39, 41, 16, 1, '16000000.0000', '', 0),
-(39, 42, 5, 1, '5500000.0000', '', 0),
-(39, 43, 3, 1, '5000000.0000', '', 0),
-(40, 44, 16, 1, '16000000.0000', '', 0),
-(40, 45, 9, 1, '5400000.0000', '', 0),
-(41, 46, 16, 1, '16000000.0000', '', 0),
-(42, 47, 16, 1, '16000000.0000', '', 0),
-(43, 48, 5, 1, '5500000.0000', '', 1);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `product`
 --
 
@@ -398,70 +362,6 @@ INSERT INTO `support` (`id`, `name`, `yahoo`, `gmail`, `skype`, `phone`, `sort_o
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaction`
---
-
-CREATE TABLE IF NOT EXISTS `transaction` (
-  `id` bigint(20) NOT NULL,
-  `type` tinyint(4) NOT NULL DEFAULT '0',
-  `status` tinyint(4) NOT NULL DEFAULT '0',
-  `user_id` int(11) NOT NULL DEFAULT '0',
-  `user_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `user_email` varchar(50) COLLATE utf8_bin NOT NULL,
-  `user_phone` varchar(20) COLLATE utf8_bin NOT NULL,
-  `amount` decimal(15,4) NOT NULL DEFAULT '0.0000',
-  `payment` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `payment_info` text COLLATE utf8_bin NOT NULL,
-  `message` varchar(255) COLLATE utf8_bin NOT NULL,
-  `security` varchar(16) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `created` int(11) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=44 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Dumping data for table `transaction`
---
-
-INSERT INTO `transaction` (`id`, `type`, `status`, `user_id`, `user_name`, `user_email`, `user_phone`, `amount`, `payment`, `payment_info`, `message`, `security`, `created`) VALUES
-(7, 0, 1, 15, 'Hoàng văn Tuyền', 'hoangvantuyencnt@gmail.com', '01686039488', '4000000.0000', 'nganluong', '', '', '', 0),
-(8, 0, 0, 15, 'Hoàng văn Tuyền', 'hoangvantuyencnt@gmail.com', '01686039488', '4000000.0000', 'nganluong', '', '', '', 0),
-(9, 0, 0, 0, 'Hoàng văn Tuyền', 'hoangvantuyencnt@gmail.com', '01686039488', '10000000.0000', 'nganluong', '', '111', '', 0),
-(10, 0, 0, 0, 'Hoàng văn Tuyền', 'hoangvantuyencnt@gmail.com', '01686039488', '10000000.0000', 'nganluong', '', '111111', '', 0),
-(11, 0, 2, 0, 'Hoàng văn Tuyền', 'hoangvantuyencnt@gmail.com', '111111', '10000000.0000', 'nganluong', '', '111', '', 0),
-(12, 0, 1, 0, 'Hoàng văn Tuyền', 'hoangvantuyencnt@gmail.com', '7667676', '10000000.0000', 'nganluong', '', '', '', 0),
-(13, 0, 1, 0, 'Hoàng văn Tuyền', 'hoangvantuyencnt@gmail.com', '11', '20000000.0000', 'nganluong', '', '11', '', 0),
-(14, 0, 1, 0, 'Hoàng văn Tuyền', 'hoangvantuyencnt@gmail.com', '01686039488', '10000000.0000', 'nganluong', '', '', '', 0),
-(15, 0, 0, 19, 'Hoàng văn Tuyền', 'hoangvantuyencnt@gmail.com', '01686039488', '5000000.0000', 'baokim', '', '', '', 0),
-(16, 0, 0, 19, 'Hoàng văn Tuyền', 'hoangvantuyencnt@gmail.com', '01686039488', '5000000.0000', 'baokim', '', '', '', 0),
-(17, 0, 2, 19, 'Hoàng văn Tuyền', 'hoangvantuyencnt@gmail.com', '01686039488', '5000000.0000', 'baokim', '', '', '', 0),
-(18, 0, 0, 19, 'Hoàng văn Tuyền', 'hoangvantuyencnt@gmail.com', '01686039488', '5000000.0000', 'baokim', '', '', '', 0),
-(19, 0, 0, 19, 'Hoàng văn Tuyền', 'hoangvantuyencnt@gmail.com', '01686039488', '5000000.0000', 'baokim', '', '', '', 0),
-(20, 0, 0, 19, 'Hoàng văn Tuyền', 'hoangvantuyencnt@gmail.com', '01686039488', '5000000.0000', 'baokim', '', '', '', 0),
-(21, 0, 0, 0, 'Hoàng văn Tuyền', 'hoangvantuyencnt@gmail.com', '01686039488', '10000000.0000', 'dathang', '', '', '', 0),
-(22, 0, 0, 19, 'Học lập trình web php', 'hoangvantuyencnt@gmail.com', '676676', '17000000.0000', 'nganluong', '', 'Giao hàng tới ABC', '', 0),
-(23, 0, 0, 0, 'Hoàng văn Tuyền', 'hoangvantuyencnt@gmail.com', '018487458547', '9500000.0000', 'offline', '', 'Chuyển hàng đúng thời gian vào 6/5/2016', '', 0),
-(24, 0, 2, 0, 'Hoàng văn Tuyền', 'hoangvantuyencnt@gmail.com', '018487458547', '5400000.0000', 'baokim', '', 'abc', '', 0),
-(25, 0, 0, 0, 'Hoàng văn Tuyền', 'hoangvantuyencnt@gmail.com', '018487458547', '5800000.0000', 'baokim', '', 'test', '', 0),
-(26, 0, 0, 19, 'Đặng Lưu Nhật Tân', 'dangluunhattan@gmail.com', '0943541741', '6000000.0000', 'nganluong', '', 'ewrwerwer', '', 2147483647),
-(27, 0, 0, 19, 'Đặng Lưu Nhật Tân', 'dangluunhattan@gmail.com', '0943541741', '6000000.0000', 'baokim', '', 'sfsdfsdfsdf', '', 2147483647),
-(28, 0, 0, 21, 'Đặng Lưu Nhật Tân', 'dangluunhattan2@gmail.com', '0943541741', '16000000.0000', 'offline', '', 'Cam Ranh', '', 2147483647),
-(29, 0, 0, 21, 'Đặng Lưu Nhật Tân', 'dangluunhattan2@gmail.com', '0943541741', '16000000.0000', 'baokim', '', 'Cam Ranh', '', 2147483647),
-(30, 0, 0, 21, 'Đặng Lưu Nhật Tân', 'dangluunhattan2@gmail.com', '0943541741', '16000000.0000', 'baokim', '', 'HCM', '', 2147483647),
-(41, 0, 0, 19, 'Đặng Lưu Nhật Tân', 'dangluunhattan@gmail.com', '0943541741', '16000000.0000', 'baokim', '', 'dsfdsgfdsf', '', 2147483647),
-(32, 0, 0, 19, 'Nhật Tân', 'dangluunhattan@gmail.com', '0943541741', '21000000.0000', 'offline', '', 'Khánh Hòa', '', 2147483647),
-(33, 0, 0, 19, 'Nhật Tân', 'dangluunhattan@gmail.com', '0943541741', '5000000.0000', 'baokim', '', 'adadad', '', 2147483647),
-(34, 0, 0, 19, 'Đặng Lưu Nhật Tân', 'dangluunhattan@gmail.com', '0943541741', '32000000.0000', 'offline', '', 'Cam Ranh- Khánh Hòa', '', 2147483647),
-(35, 0, 2, 19, 'Đặng Lưu Nhật Tân', 'dangluunhattan@gmail.com', '0943541741', '9500000.0000', 'baokim', '', 'Cam Ranh- Khánh Hòa', '', 2147483647),
-(36, 0, 2, 19, 'Nhật Tân', 'dangluunhattan@gmail.com', '0943541741', '32000000.0000', 'baokim', '', 'sdfsdf', '', 2147483647),
-(37, 0, 0, 19, 'Nhật Tân', 'dangluunhattan@gmail.com', '0943541741', '16000000.0000', 'offline', '', 'adsfsdf', '', 1477638033),
-(38, 0, 0, 19, 'Nhật Tân', 'dangluunhattan@gmail.com', '0943541741', '16000000.0000', 'baokim', '', 'sadfsdf', '', 1477638033),
-(39, 0, 0, 19, 'Nhật Tân', 'dangluunhattan@gmail.com', '0943541741', '31900000.0000', 'offline', '', 'Khánh Hòa', '', 1477638033),
-(40, 0, 0, 19, 'Nhật Tân', 'dangluunhattan@gmail.com', '0943541741', '21400000.0000', 'offline', '', 'Khánh Hòa', '', 1477638033),
-(42, 0, 0, 19, 'Đặng Lưu Nhật Tân', 'dangluunhattan@gmail.com', '0943541741', '16000000.0000', 'offline', '', 'Cam Ranh- Khánh Hòa', '', 1477638033),
-(43, 0, 2, 19, 'Đặng Lưu Nhật Tân', 'dangluunhattan@gmail.com', '0943541741', '5500000.0000', 'offline', '', 'ádasd', '', 1477639635);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `user`
 --
 
@@ -541,6 +441,18 @@ ALTER TABLE `admin_group`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `bill`
+--
+ALTER TABLE `bill`
+  ADD PRIMARY KEY (`bill_id`);
+
+--
+-- Indexes for table `bill_detail`
+--
+ALTER TABLE `bill_detail`
+  ADD PRIMARY KEY (`bill_detail_id`);
+
+--
 -- Indexes for table `catalog`
 --
 ALTER TABLE `catalog`
@@ -591,12 +503,6 @@ ALTER TABLE `news`
   ADD FULLTEXT KEY `title` (`title`);
 
 --
--- Indexes for table `order`
---
-ALTER TABLE `order`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
@@ -613,12 +519,6 @@ ALTER TABLE `slide`
 -- Indexes for table `support`
 --
 ALTER TABLE `support`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `transaction`
---
-ALTER TABLE `transaction`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -688,11 +588,6 @@ ALTER TABLE `menu`
 ALTER TABLE `news`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT for table `order`
---
-ALTER TABLE `order`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
---
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
@@ -707,11 +602,6 @@ ALTER TABLE `slide`
 --
 ALTER TABLE `support`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `transaction`
---
-ALTER TABLE `transaction`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT for table `user`
 --

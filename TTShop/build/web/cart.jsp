@@ -4,6 +4,8 @@
     Author     : TAN
 --%>
 
+<%@page import="javax.script.ScriptEngine"%>
+<%@page import="javax.script.ScriptEngineManager"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.Item"%>
 <%@page import="java.util.Map"%>
@@ -81,11 +83,15 @@
               <tbody>
                   <%for (Map.Entry<Long, Item> list : cart.getCartItems().entrySet()) {%> 
                   <tr>
+                            <%ScriptEngineManager manager = new ScriptEngineManager();
+                            ScriptEngine engine = manager.getEngineByName("js");
+                            Object result = engine.eval("4*5");%>
                             <td style="text-align: center;"><a href=""><img width="60" src="upload/product/<%=list.getValue().getProduct().getProductImage()%>" alt=""></a></td>
                             <td><b><%=list.getValue().getProduct().getProductName()%></b></td>
                             <td><input class="span1" style="max-width:auto" placeholder="1" size="16" type="number" name="qty_18" value="1"> </td>
                             <td><%=NumberFormat.getInstance().format(list.getValue().getProduct().getProductPrice())%> VNĐ</td>
-                            <td><%=list.getValue().getQty()%> x <%=NumberFormat.getInstance().format(list.getValue().getProduct().getProductPrice())%></td>
+                            <td><%=NumberFormat.getInstance().format(list.getValue().getProduct().getProductPrice())%> VNĐ</td>
+<!--                            <td><%=list.getValue().getQty()%> x <%=NumberFormat.getInstance().format(list.getValue().getProduct().getProductPrice())%> VNĐ</td>-->
                             <td style="text-align: center;"><a data-toggle="modal" data-target="#myModal2" class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i></a></td>
                             <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
@@ -113,38 +119,17 @@
 				</tbody>
         <thead>
           <tr>
-                  <td colspan="2" style="text-align:right"><strong>Tổng số lượng:</strong></td>
-                  <td style="display:block"> <strong> 1</strong></td>
-                  <td colspan="2" style="text-align:right"><strong>Tổng tiền:</strong></td>
-                  <td class="label label-important" style="display:block;"> <strong> 120,000,000 VNĐ </strong></td>
+                  <td colspan="2" style="text-align:right"><strong></strong></td>
+                  <td style="display:block"> <strong> </strong></td>
+                  <td colspan="2" style="text-align:right"><strong></strong></td>
+                  <td  style="display:block;"> <strong>  </strong></td>
                 </tr>
         </thead>
             </table>
-            <button type="button" class="btn btn-link btn-large pull-left" data-toggle="modal" data-target="#myModal">
-              <p class="text-error">Xóa Giỏ Hàng ?</p>
-            </button>
+            
 
-<!-- Modal Delete All-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
-      </div>
-      <div class="modal-body">
-        <p>Bạn có chắc muốn xóa toàn bộ giỏ hàng không?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-        <a href="" class="btn btn-danger">Xác nhận xóa</a>
 
-      </div>
-    </div>
-  </div>
-</div> <!-- End Modal -->
-
-            <a href="" class="btn-large btn-success pull-right">Mua hàng</a>
+            <a href="checkout.jsp" class="btn-large btn-success pull-right">Mua hàng</a>
             <button type="submit" class="btn btn-primary btn-large pull-left">Cập nhật</button>
 
 

@@ -155,11 +155,17 @@
 		</div>
           </div>
 
-	</div>
+</div><hr><hr>
+<div class="fb-comments" data-href="http://localhost/TTShop/detail.jsp?product=<%=product.getProductID()%>" data-width="817" data-numposts="5"></div>
+
 </div>
+                                
 </div>
+                                
 </div>
+                                
 </div>
+
         <jsp:include page="footer.jsp"></jsp:include>
     </body>
 </html>
